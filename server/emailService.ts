@@ -1,6 +1,12 @@
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASSWORD,
+  },
+});
 
 interface EmailData {
   student: { name: string; email: string };
@@ -111,19 +117,15 @@ export async function sendEnvironmentalReport(emailData: EmailData): Promise<boo
     </html>
     `;
 
-    const { data, error } = await resend.emails.send({
-      from: 'Calculadora Ambiental <onboarding@resend.dev>',
-      to: [student.email],
+    const mailOptions = {
+      from: `"Calculadora Ambiental - IQBAB" <${process.env.GMAIL_USER}>`,
+      to: student.email,
       subject: `🌱 Tu Informe Ambiental - ${student.name}`,
       html: htmlContent,
-    });
+    };
 
-    if (error) {
-      console.error('Error sending email:', error);
-      return false;
-    }
-
-    console.log('Email sent successfully:', data);
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info.messageId);
     return true;
   } catch (error) {
     console.error('Error in email service:', error);
