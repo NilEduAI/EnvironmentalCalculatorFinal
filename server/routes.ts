@@ -101,9 +101,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
         reportData: reportData,
       });
 
-      // Here you would integrate with an email service like SendGrid, Mailgun, etc.
-      // For now, we'll simulate email sending
-      console.log(`Email report sent to ${student.email}`);
+      // Send email report using Resend
+      const { sendEnvironmentalReport } = await import('./emailService');
+      const emailSent = await sendEnvironmentalReport(reportData);
+      
+      if (emailSent) {
+        console.log(`Email report sent successfully to ${student.email}`);
+      } else {
+        console.error(`Failed to send email report to ${student.email}`);
+      }
 
       res.json({ 
         message: "Student registered and email sent successfully",
