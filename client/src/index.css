@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 11% 98%; /* #F5F7FA */
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 210 11% 98%; /* #F5F7FA */
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 142 76% 36%; /* #2E7D32 - Primary Green */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 207 90% 54%; /* #1976D2 - Primary Blue */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 37 100% 50%; /* #FF8F00 - Accent Orange */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 142 76% 36%; /* #2E7D32 */
+  --radius: 0.5rem;
+  --chart-1: 142 76% 36%; /* Green */
+  --chart-2: 207 90% 54%; /* Blue */
+  --chart-3: 37 100% 50%; /* Orange */
+  --chart-4: 122 39% 49%; /* Success Green */
+  --chart-5: 25 95% 53%; /* Warning Orange */
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 142 76% 36%; /* #2E7D32 */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 207 90% 54%; /* #1976D2 */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 37 100% 50%; /* #FF8F00 */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 142 76% 36%; /* #2E7D32 */
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+
+  /* Environmental theme specific styles */
+  .bg-environmental-gradient {
+    background: linear-gradient(135deg, #2E7D32 0%, #1976D2 100%);
+  }
+  
+  .text-environmental-primary {
+    color: #2E7D32;
+  }
+  
+  .text-environmental-secondary {
+    color: #1976D2;
+  }
+  
+  .border-environmental-primary {
+    border-color: #2E7D32;
+  }
+  
+  .hover:bg-environmental-primary:hover {
+    background-color: #2E7D32;
+  }
+  
+  /* Enhanced accessibility */
+  .focus-visible:outline-none.focus-visible:ring-2.focus-visible:ring-environmental-primary {
+    outline: none;
+    box-shadow: 0 0 0 2px #2E7D32;
+  }
+  
+  /* Responsive typography */
+  .text-responsive-xl {
+    @apply text-lg md:text-xl lg:text-2xl;
+  }
+  
+  .text-responsive-2xl {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  /* Educational styling */
+  .card-educational {
+    @apply bg-white rounded-xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300;
+  }
+  
+  .button-educational-primary {
+    @apply bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2;
+  }
+  
+  .button-educational-secondary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: 0 0% 20%;
+    --ring: 0 0% 20%;
+  }
+  
+  .dark {
+    --border: 0 0% 80%;
+    --ring: 0 0% 80%;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
