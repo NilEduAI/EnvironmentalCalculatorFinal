@@ -112,7 +112,7 @@ export async function sendEnvironmentalReport(emailData: EmailData): Promise<boo
     `;
 
     const { data, error } = await resend.emails.send({
-      from: 'Calculadora Ambiental <calculadora@resend.dev>',
+      from: 'Calculadora Ambiental <onboarding@resend.dev>',
       to: [student.email],
       subject: `🌱 Tu Informe Ambiental - ${student.name}`,
       html: htmlContent,
