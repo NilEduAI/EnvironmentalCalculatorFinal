@@ -108,7 +108,28 @@ export default function Calculator() {
           }}
         ></div>
         
-        <div className="relative z-20 max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
+        {/* Logos Section */}
+        <div className="relative z-20 flex justify-between items-start p-4">
+          {/* IQBB Logo */}
+          <div className="flex-shrink-0">
+            <img 
+              src="@assets/LOGO IQBB PLUMA POSITIU sense baseline.png" 
+              alt="Institut de Química i Biotecnologia de Barcelona"
+              className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert"
+            />
+          </div>
+          
+          {/* Nil EduAI Logo */}
+          <div className="flex-shrink-0">
+            <img 
+              src="@assets/ChatGPT Image 27 may 2025, 12_31_05.png" 
+              alt="Nil EduAI - Desarrollador"
+              className="h-12 md:h-16 w-auto object-contain"
+            />
+          </div>
+        </div>
+        
+        <div className="relative z-20 max-w-6xl mx-auto px-4 py-8 md:py-16 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
             {t('title')}
           </h1>

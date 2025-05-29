@@ -11,6 +11,27 @@ export default function Documentation() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
+        {/* Logos Section */}
+        <div className="flex justify-between items-center mb-6">
+          {/* IQBB Logo */}
+          <div className="flex-shrink-0">
+            <img 
+              src="@assets/LOGO IQBB PLUMA POSITIU sense baseline.png" 
+              alt="Institut de Química i Biotecnologia de Barcelona"
+              className="h-10 md:h-12 w-auto object-contain"
+            />
+          </div>
+          
+          {/* Nil EduAI Logo */}
+          <div className="flex-shrink-0">
+            <img 
+              src="@assets/ChatGPT Image 27 may 2025, 12_31_05.png" 
+              alt="Nil EduAI - Desarrollador"
+              className="h-10 md:h-12 w-auto object-contain"
+            />
+          </div>
+        </div>
+
         {/* Back Navigation */}
         <div className="mb-6">
           <Link href="/">
