@@ -19,6 +19,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Calculate emissions
   app.post("/api/calculate", async (req, res) => {
     try {
+      console.log("Received data:", req.body);
+      
       const calculateSchema = z.object({
         distance: z.number().min(0),
         transportMethod: z.enum(Object.keys(EMISSION_FACTORS) as [keyof typeof EMISSION_FACTORS]),
@@ -27,6 +29,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       const data = calculateSchema.parse(req.body);
+      console.log("Parsed data:", data);
       
       // Calculate emissions
       const transportEmission = EMISSION_FACTORS[data.transportMethod] * data.distance * 2; // round trip
@@ -54,7 +57,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         yearlyEmissions,
       });
     } catch (error) {
-      res.status(400).json({ message: "Invalid calculation data" });
+      console.error("Calculation error:", error);
+      res.status(400).json({ message: "Invalid calculation data", error: error.message });
     }
   });
 
