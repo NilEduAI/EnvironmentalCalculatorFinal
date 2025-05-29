@@ -187,7 +187,7 @@ export function HabitsStep({
         <Button 
           onClick={onNext}
           disabled={!isFormValid}
-          className="bg-green-600 hover:bg-green-700 text-white"
+          className={`${!isFormValid ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'} text-white`}
         >
           {t('calculate')}
           <span className="ml-2">🧮</span>
