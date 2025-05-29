@@ -1,9 +1,21 @@
 import { Handler } from '@netlify/functions';
 import { z } from 'zod';
-import { DatabaseStorage } from '../../server/storage';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { eq, sql } from 'drizzle-orm';
+import ws from "ws";
+import * as schema from "../../shared/schema";
+import { students, calculations, emailReports } from '../../shared/schema';
 import { sendEnvironmentalReport } from '../../server/emailService';
 
-const storage = new DatabaseStorage();
+neonConfig.webSocketConstructor = ws;
+
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL must be set");
+}
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const db = drizzle({ client: pool, schema });
 
 export const handler: Handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
@@ -25,7 +37,11 @@ export const handler: Handler = async (event, context) => {
     const { name, email, calculationId } = schema.parse(body);
     
     // Get calculation data
-    const calculation = await storage.getCalculation(calculationId);
+    const [calculation] = await db
+      .select()
+      .from(calculations)
+      .where(eq(calculations.id, calculationId));
+      
     if (!calculation) {
       return {
         statusCode: 404,
@@ -38,16 +54,30 @@ export const handler: Handler = async (event, context) => {
     }
 
     // Check if student already exists
-    let student = await storage.getStudentByEmail(email);
+    let [student] = await db
+      .select()
+      .from(students)
+      .where(eq(students.email, email));
+      
     if (!student) {
-      student = await storage.createStudent({ name, email });
+      [student] = await db
+        .insert(students)
+        .values({ name, email })
+        .returning();
     }
 
     // Link calculation to student
-    await storage.updateCalculationStudent(calculationId, student.id);
+    await db
+      .update(calculations)
+      .set({ studentId: student.id })
+      .where(eq(calculations.id, calculationId));
 
     // Get average for comparison
-    const averageDaily = await storage.getAverageEmissions();
+    const result = await db
+      .select({ avg: sql<number>`AVG(${calculations.dailyEmissions})` })
+      .from(calculations);
+      
+    const averageDaily = result[0]?.avg || 3.2;
     const comparisonPercentage = ((calculation.dailyEmissions - averageDaily) / averageDaily) * 100;
 
     // Generate recommendations based on calculation
@@ -72,11 +102,13 @@ export const handler: Handler = async (event, context) => {
     const emailSent = await sendEnvironmentalReport(emailData);
     
     if (emailSent) {
-      await storage.createEmailReport({
-        studentId: student.id,
-        calculationId,
-        sentAt: new Date(),
-      });
+      await db
+        .insert(emailReports)
+        .values({
+          studentId: student.id,
+          calculationId,
+          sentAt: new Date(),
+        });
     }
 
     return {
@@ -107,8 +139,8 @@ export const handler: Handler = async (event, context) => {
 };
 
 function generateRecommendations(calculation: any) {
-  const homeRecommendations = [];
-  const schoolRecommendations = [];
+  const homeRecommendations: string[] = [];
+  const schoolRecommendations: string[] = [];
 
   // Transport recommendations
   if (calculation.transportMethod === 'private-car') {

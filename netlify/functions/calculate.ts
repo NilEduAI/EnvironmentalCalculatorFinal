@@ -1,9 +1,19 @@
 import { Handler } from '@netlify/functions';
 import { z } from 'zod';
-import { EMISSION_FACTORS, HYDRATION_FACTORS, PACKAGING_FACTORS } from '../../shared/schema';
-import { DatabaseStorage } from '../../server/storage';
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import ws from "ws";
+import * as schema from "../../shared/schema";
+import { EMISSION_FACTORS, HYDRATION_FACTORS, PACKAGING_FACTORS, calculations } from '../../shared/schema';
 
-const storage = new DatabaseStorage();
+neonConfig.webSocketConstructor = ws;
+
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL must be set");
+}
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const db = drizzle({ client: pool, schema });
 
 export const handler: Handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
@@ -36,15 +46,21 @@ export const handler: Handler = async (event, context) => {
     const weeklyEmissions = dailyEmissions * 5; // school days
     const yearlyEmissions = weeklyEmissions * 36; // school weeks
 
-    const calculation = {
+    const calculationData = {
       studentId: null,
-      ...data,
+      distance: data.distance,
+      transportMethod: data.transportMethod,
+      hydrationHabit: data.hydrationHabit,
+      packagingHabit: data.packagingHabit,
       dailyEmissions,
       weeklyEmissions,
       yearlyEmissions,
     };
 
-    const savedCalculation = await storage.createCalculation(calculation);
+    const [savedCalculation] = await db
+      .insert(calculations)
+      .values(calculationData)
+      .returning();
     
     return {
       statusCode: 200,

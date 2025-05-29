@@ -13,26 +13,29 @@ Aplicación web para calcular el impacto ambiental de estudiantes del Institut d
 ## Tecnologías
 
 - Frontend: React + TypeScript + Tailwind CSS
-- Backend: Node.js + Express
-- Base de datos: PostgreSQL
+- Backend: Netlify Functions
+- Base de datos: Supabase PostgreSQL
 - Email: Nodemailer
 
-## Despliegue
+## Despliegue en Netlify + Supabase
 
-### Variables de entorno requeridas:
+### 1. Configurar Supabase:
+1. Crear cuenta en [Supabase](https://supabase.com)
+2. Crear nuevo proyecto
+3. Ir a Settings → Database
+4. Copiar la Connection String (URI)
 
+### 2. Variables de entorno en Netlify:
 ```
-DATABASE_URL=tu_url_de_postgresql
+DATABASE_URL=postgresql://postgres:[password]@db.[ref].supabase.co:5432/postgres
 GMAIL_USER=tu_email@gmail.com
 GMAIL_PASSWORD=tu_contraseña_de_aplicacion
 ```
 
-### Comandos:
-
+### 3. Comandos:
 ```bash
 npm install
 npm run build
-npm start
 ```
 
 ## Factores de emisión

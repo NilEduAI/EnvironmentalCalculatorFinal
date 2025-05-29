@@ -1,3 +1,6 @@
+# Este archivo es para Render (alternativa a Netlify)
+# Para usar Netlify + Supabase, ignora este archivo
+
 services:
   - type: web
     name: calculadora-ambiental
