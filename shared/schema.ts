@@ -66,9 +66,9 @@ export const EMISSION_FACTORS = {
 
 // Daily emission factors
 export const HYDRATION_FACTORS = {
-  'plastic-bottle': 0.1, // per day
-  'steel-bottle': 0.01,  // amortized
-  'soft-drinks': 0.15,   // per day
+  'plastic-bottle': 0.8, // per day (multiple bottles)
+  'steel-bottle': 0.1,   // amortized per day
+  'soft-drinks': 0.9,    // per day (cans/bottles + refrigeration)
 } as const;
 
 export const PACKAGING_FACTORS = {

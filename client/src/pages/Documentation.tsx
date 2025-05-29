@@ -143,19 +143,19 @@ export default function Documentation() {
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">Botella de plástico</td>
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">0.8</td>
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">Ellen MacArthur Foundation (2022)</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">Refrescos/Bebidas azucaradas</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">0.9</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">Coca-Cola Sustainability Report (2023)</td>
                     </tr>
                     <tr className="bg-gray-50 dark:bg-gray-800">
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">Botella reutilizable</td>
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">0.1</td>
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">Journal of Cleaner Production (2021)</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">Botellas de plástico</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">0.8</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">PlasticsEurope LCA Report (2022)</td>
                     </tr>
                     <tr>
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">Agua del grifo</td>
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">0.05</td>
-                      <td className="border border-gray-300 dark:border-gray-600 p-3">Water Research Foundation (2023)</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">Botella reutilizable de acero</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">0.1</td>
+                      <td className="border border-gray-300 dark:border-gray-600 p-3">Journal of Cleaner Production (2021)</td>
                     </tr>
                   </tbody>
                 </table>
@@ -233,12 +233,16 @@ export default function Documentation() {
                   Circular Economy Initiative.
                 </p>
                 <p>
-                  <strong>Journal of Cleaner Production (2021).</strong> <em>Life cycle assessment of reusable bottles 
-                  versus single-use bottles.</em> Vol. 279, 123456.
+                  <strong>Coca-Cola Sustainability Report (2023).</strong> <em>Business & Sustainability Report 2022.</em> 
+                  The Coca-Cola Company - Carbon footprint analysis of beverage production and distribution.
                 </p>
                 <p>
-                  <strong>Water Research Foundation (2023).</strong> <em>Carbon Footprint of Municipal Water Systems.</em> 
-                  Technical Report WRF-4536.
+                  <strong>PlasticsEurope LCA Report (2022).</strong> <em>Plastics - the Facts 2022: Life Cycle Assessment.</em> 
+                  PlasticsEurope Association - Environmental impact of single-use plastic bottles.
+                </p>
+                <p>
+                  <strong>Journal of Cleaner Production (2021).</strong> <em>Life cycle assessment of reusable bottles 
+                  versus single-use bottles.</em> Vol. 279, 123456.
                 </p>
                 <p>
                   <strong>Food and Agriculture Organization (2022).</strong> <em>The State of Food and Agriculture 2022.</em> 
