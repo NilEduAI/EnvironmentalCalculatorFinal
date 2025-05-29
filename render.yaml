@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: calculadora-ambiental
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_PASSWORD
+        sync: false
+      - key: DATABASE_URL
+        sync: false
