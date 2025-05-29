@@ -58,7 +58,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Calculation error:", error);
-      res.status(400).json({ message: "Invalid calculation data", error: error.message });
+      res.status(400).json({ message: "Invalid calculation data", error: error instanceof Error ? error.message : 'Unknown error' });
     }
   });
 

@@ -6,7 +6,7 @@ import { eq, sql } from 'drizzle-orm';
 import ws from "ws";
 import * as schema from "../../shared/schema";
 import { students, calculations, emailReports } from '../../shared/schema';
-import { sendEnvironmentalReport } from '../../server/emailService';
+import { sendEnvironmentalReport } from './emailService';
 
 neonConfig.webSocketConstructor = ws;
 
@@ -28,13 +28,13 @@ export const handler: Handler = async (event, context) => {
   try {
     const body = JSON.parse(event.body || '{}');
     
-    const schema = z.object({
+    const validationSchema = z.object({
       name: z.string().min(1),
       email: z.string().email(),
       calculationId: z.number(),
     });
 
-    const { name, email, calculationId } = schema.parse(body);
+    const { name, email, calculationId } = validationSchema.parse(body);
     
     // Get calculation data
     const [calculation] = await db
