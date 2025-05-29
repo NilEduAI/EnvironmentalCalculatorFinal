@@ -1,4 +1,7 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'wouter';
+import { ArrowLeft, Calculator } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
@@ -8,6 +11,16 @@ export default function Documentation() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
+        {/* Back Navigation */}
+        <div className="mb-6">
+          <Link href="/">
+            <Button variant="outline" className="mb-4 hover:bg-green-50 hover:border-green-300">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Volver a la Calculadora
+            </Button>
+          </Link>
+        </div>
+
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-green-800 dark:text-green-300 mb-4">
             Documentación Técnica
