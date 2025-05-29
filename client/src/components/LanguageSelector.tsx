@@ -15,24 +15,22 @@ export function LanguageSelector() {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50">
-      <div className="bg-white rounded-lg shadow-md p-2 flex space-x-2">
-        {languages.map((lang) => (
-          <Button
-            key={lang.code}
-            onClick={() => changeLanguage(lang.code)}
-            variant={i18n.language === lang.code ? "default" : "ghost"}
-            size="sm"
-            className={`px-3 py-1 text-sm font-medium ${
-              i18n.language === lang.code
-                ? "bg-green-600 hover:bg-green-700 text-white"
-                : "text-gray-600 hover:bg-gray-100"
-            }`}
-          >
-            {lang.label}
-          </Button>
-        ))}
-      </div>
+    <div className="bg-white/20 backdrop-blur-sm rounded-lg p-2 flex space-x-2">
+      {languages.map((lang) => (
+        <Button
+          key={lang.code}
+          onClick={() => changeLanguage(lang.code)}
+          variant={i18n.language === lang.code ? "default" : "ghost"}
+          size="sm"
+          className={`px-3 py-1 text-sm font-medium ${
+            i18n.language === lang.code
+              ? "bg-green-600 hover:bg-green-700 text-white"
+              : "text-white hover:bg-white/20"
+          }`}
+        >
+          {lang.label}
+        </Button>
+      ))}
     </div>
   );
 }
