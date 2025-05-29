@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import { useMutation } from "@tanstack/react-query";
+import { Link } from 'wouter';
+import { BookOpen } from 'lucide-react';
 import { apiRequest } from "@/lib/queryClient";
+import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { ProgressStepper } from "@/components/ProgressStepper";
 import { TransportationStep } from "@/components/TransportationStep";
@@ -116,6 +119,16 @@ export default function Calculator() {
             <span className="text-2xl">🌱</span>
             <span className="text-lg">{t('tagline')}</span>
             <span className="text-2xl">🧮</span>
+          </div>
+          
+          {/* Documentation Link */}
+          <div className="mt-8">
+            <Link href="/documentacion">
+              <Button variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white">
+                <BookOpen className="w-4 h-4 mr-2" />
+                Ver Documentación Técnica
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
