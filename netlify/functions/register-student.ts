@@ -106,8 +106,8 @@ export const handler: Handler = async (event, context) => {
         .insert(emailReports)
         .values({
           studentId: student.id,
-          calculationId,
-          sentAt: new Date(),
+          calculationId: calculationId,
+          reportData: emailData,
         });
     }
 
