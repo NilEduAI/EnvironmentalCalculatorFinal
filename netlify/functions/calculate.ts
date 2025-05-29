@@ -29,9 +29,9 @@ export const handler: Handler = async (event, context) => {
     
     const calculateSchema = z.object({
       distance: z.number().min(0),
-      transportMethod: z.enum(Object.keys(EMISSION_FACTORS) as [keyof typeof EMISSION_FACTORS]),
-      hydrationHabit: z.enum(Object.keys(HYDRATION_FACTORS) as [keyof typeof HYDRATION_FACTORS]),
-      packagingHabit: z.enum(Object.keys(PACKAGING_FACTORS) as [keyof typeof PACKAGING_FACTORS]),
+      transportMethod: z.enum(['walking', 'bicycle', 'car-solo', 'car-shared', 'motorcycle', 'public-transport', 'train', 'electric-car']),
+      hydrationHabit: z.enum(['plastic-bottle', 'steel-bottle', 'soft-drinks']),
+      packagingHabit: z.enum(['aluminum-foil', 'zero-waste']),
     });
 
     const data = calculateSchema.parse(body);
