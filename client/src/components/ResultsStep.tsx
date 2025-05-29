@@ -43,7 +43,7 @@ export function ResultsStep({
 
   // Get average emissions for comparison
   const { data: averageData } = useQuery({
-    queryKey: ['/.netlify/functions/average-emissions'],
+    queryKey: ['/api/average-emissions'],
   });
 
   const averageDaily = averageData?.averageDaily || 3.2;
@@ -53,7 +53,7 @@ export function ResultsStep({
   // Register student mutation
   const registerMutation = useMutation({
     mutationFn: async (data: { name: string; email: string; calculationId: number }) => {
-      const response = await apiRequest('POST', '/.netlify/functions/register-student', data);
+      const response = await apiRequest('POST', '/api/register-student', data);
       return response.json();
     },
     onSuccess: (data) => {

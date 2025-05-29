@@ -40,7 +40,7 @@ export default function Calculator() {
       hydrationHabit: HydrationHabit;
       packagingHabit: PackagingHabit;
     }) => {
-      const response = await apiRequest('POST', '/.netlify/functions/calculate', data);
+      const response = await apiRequest('POST', '/api/calculate', data);
       return response.json();
     },
     onSuccess: (data) => {
