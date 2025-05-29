@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Link } from 'wouter';
 import { BookOpen } from 'lucide-react';
 import { apiRequest } from "@/lib/queryClient";
+import { API_CONFIG } from "@/lib/config";
 import { Button } from "@/components/ui/button";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { ProgressStepper } from "@/components/ProgressStepper";
@@ -40,7 +41,7 @@ export default function Calculator() {
       hydrationHabit: HydrationHabit;
       packagingHabit: PackagingHabit;
     }) => {
-      const response = await apiRequest('POST', '/api/calculate', data);
+      const response = await apiRequest('POST', API_CONFIG.endpoints.calculate, data);
       return response.json();
     },
     onSuccess: (data) => {

@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
+import { API_CONFIG } from "@/lib/config";
 import { 
   BarChart, 
   Cloud, 
@@ -43,17 +44,17 @@ export function ResultsStep({
 
   // Get average emissions for comparison
   const { data: averageData } = useQuery({
-    queryKey: ['/api/average-emissions'],
+    queryKey: [API_CONFIG.endpoints.averageEmissions],
   });
 
-  const averageDaily = averageData?.averageDaily || 3.2;
+  const averageDaily = (averageData as { averageDaily?: number })?.averageDaily || 3.2;
   const comparisonPercentage = Math.round(((averageDaily - dailyEmissions) / averageDaily) * 100);
   const progressPercentage = Math.min((dailyEmissions / averageDaily) * 100, 100);
 
   // Register student mutation
   const registerMutation = useMutation({
     mutationFn: async (data: { name: string; email: string; calculationId: number }) => {
-      const response = await apiRequest('POST', '/api/register-student', data);
+      const response = await apiRequest('POST', API_CONFIG.endpoints.registerStudent, data);
       return response.json();
     },
     onSuccess: (data) => {
