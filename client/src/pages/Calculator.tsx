@@ -96,8 +96,6 @@ export default function Calculator() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <LanguageSelector />
-      
       {/* Header */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-green-700/80 to-blue-600/70 z-10"></div>
@@ -108,23 +106,28 @@ export default function Calculator() {
           }}
         ></div>
         
-        {/* Logos Section */}
-        <div className="relative z-20 flex justify-between items-start p-4">
+        {/* Top Navigation Bar */}
+        <div className="relative z-30 flex justify-between items-center p-4">
           {/* IQBB Logo */}
           <div className="flex-shrink-0">
             <img 
-              src="@assets/LOGO IQBB PLUMA POSITIU sense baseline.png" 
+              src="/attached_assets/LOGO IQBB PLUMA POSITIU sense baseline.png" 
               alt="Institut de Química i Biotecnologia de Barcelona"
-              className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert"
+              className="h-10 md:h-12 w-auto object-contain filter brightness-0 invert"
             />
+          </div>
+          
+          {/* Language Selector */}
+          <div className="flex-shrink-0">
+            <LanguageSelector />
           </div>
           
           {/* Nil EduAI Logo */}
           <div className="flex-shrink-0">
             <img 
-              src="@assets/ChatGPT Image 27 may 2025, 12_31_05.png" 
+              src="/attached_assets/ChatGPT Image 27 may 2025, 12_31_05.png" 
               alt="Nil EduAI - Desarrollador"
-              className="h-12 md:h-16 w-auto object-contain"
+              className="h-10 md:h-12 w-auto object-contain"
             />
           </div>
         </div>
